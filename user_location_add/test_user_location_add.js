@@ -4,7 +4,10 @@ f({
   authorizer: {
     principalId: 'user'
   },
-  location: '30.248764, 45.853034'
+  user_id: 'user',
+  location: '23.457524, 56.356535',
+  timestamp: 8372562834
+
 }).then(res => {
   console.log(res)
 }).catch(err => {
