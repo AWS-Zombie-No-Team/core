@@ -4,10 +4,10 @@ f({
   authorizer: {
     principalId: 'user'
   },
-  password: 'new_password2',
+  password: 'password',
   status: 'online',
   profession: 'Medic2',
-  name: 'name1'
+  name: 'user'
 }).then(res => {
   console.log(res)
 }).catch(err => {
