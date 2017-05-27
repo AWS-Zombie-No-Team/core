@@ -8,23 +8,30 @@
       "id2",
       "id3"
     ],
-    "status": "panic",
-    "profession": "Medic"
-  },
-  "Locations": {
-    "user_id": "id1",
     "location": {
       "lat": 123,
       "lon": 123
     },
-    "timestamp": 124312412412
+    "status": "panic",
+    "profession": "Medic",
+    "panic_distance" : 50
+  },
+
+  "Locations": {
+    "user_id": "id1",    // hask key
+    "location": {
+      "lat": 123,
+      "lon": 123
+    },
+    "timestamp": 124312412412   // range key
   },
   "ContactRequest": {
-    "receiver": "userId",
+    "receiver": "userId", // hash key
     "sender": "userId",
-    "timestamp": 124312412412
+    "timestamp": 124312412412  // range key
   },
   "Messages": {
+    "compoundkey": "user1-user2",  // hash key
     "receiver": "userId",
     "sender": "userId",
     "msg": "msg",
@@ -33,6 +40,6 @@
       "lon": 123
     },
     "msg_status": "received",
-    "timestamp": 124312412412
+    "timestamp": 124312412412 // range key
   }
 }
