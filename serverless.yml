@@ -59,7 +59,7 @@ functions:
 
   getmyfriends:
     handler: functions/getmyfriends.handler
-    name: ${self:service}Me-${opt:stage, self:provider.stage}
+    name: ${self:service}GetMyFriends-${opt:stage, self:provider.stage}
     description: Resolving user profile
     events:
       - http:
