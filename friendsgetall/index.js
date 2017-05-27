@@ -1,7 +1,7 @@
 const aws = require('./../lib/aws');
 const getuser = require('./../lib/get-user.js');
 
-const getMyFriends = (data) => {
+const FriendsGetAll = (data) => {
     return getuser(data.authorizer.principalId).then(user=>{
         var friends = [];
         for (var i = 0, len = user.contacts.length; i < len; i++) {
@@ -25,4 +25,4 @@ const getMyFriends = (data) => {
 
 }
 
-module.exports = getMyFriends;
+module.exports = FriendsGetAll;
