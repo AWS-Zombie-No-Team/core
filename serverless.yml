@@ -41,7 +41,7 @@ functions:
     events:
       - http:
           path: /me
-          method: post
+          method: get
           authorizer:
             name: authorizer
             resultTtlInSeconds: 600
@@ -57,13 +57,13 @@ functions:
               - X-Api-Key
               - X-Amz-Security-Token
 
-  friendsgetall:
-    handler: functions/friendsgetall.handler
+  getmyfriends:
+    handler: functions/friends-get-all.handler
     name: ${self:service}FriendsGetAll-${opt:stage, self:provider.stage}
-    description: Returns your friend profiles
+    description: Resolving user profile
     events:
       - http:
-          path: /friendsgetall
+          path: /friends-get-all
           method: get
           authorizer:
             name: authorizer
@@ -80,51 +80,28 @@ functions:
               - X-Api-Key
               - X-Amz-Security-Token
 
-contactrequest:
-    handler: functions/contactrequest.handler
-    name: ${self:service}contactRequest-${opt:stage, self:provider.stage}
-    description: Sends contact request to add as a friend
-    events:
-      - http:
-          path: /contactrequest
-          method: post
-          authorizer:
-            name: authorizer
-            resultTtlInSeconds: 600
-            identitySource: method.request.header.AuthToken
-          cors:
-            origins:
-              - '*'
-            headers:
-              - AuthToken
-              - Content-Type
-              - X-Amz-Date
-              - Authorization
-              - X-Api-Key
-              - X-Amz-Security-Token
-
-contactgetrequests:
-    handler: functions/contactgetrequests.handler
-    name: ${self:service}contactGetRequests-${opt:stage, self:provider.stage}
-    description: Returns ids who wants to add you as a friend
-    events:
-      - http:
-          path: /contactgetrequests
-          method: get
-          authorizer:
-            name: authorizer
-            resultTtlInSeconds: 600
-            identitySource: method.request.header.AuthToken
-          cors:
-            origins:
-              - '*'
-            headers:
-              - AuthToken
-              - Content-Type
-              - X-Amz-Date
-              - Authorization
-              - X-Api-Key
-              - X-Amz-Security-Token
+  updateuser:
+      handler: functions/user_update.handler
+      name: ${self:service}UserUpdate-${opt:stage, self:provider.stage}
+      description: Updatating user profile
+      events:
+        - http:
+            path: /me
+            method: post
+            authorizer:
+              name: authorizer
+              resultTtlInSeconds: 600
+              identitySource: method.request.header.AuthToken
+            cors:
+              origins:
+                - '*'
+              headers:
+                - AuthToken
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
 
 
 package:
