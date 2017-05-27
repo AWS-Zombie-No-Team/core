@@ -41,7 +41,7 @@ functions:
     events:
       - http:
           path: /me
-          method: get
+          method: post
           authorizer:
             name: authorizer
             resultTtlInSeconds: 600
@@ -58,12 +58,12 @@ functions:
               - X-Amz-Security-Token
 
   getmyfriends:
-    handler: functions/friends-get-all.handler
-    name: ${self:service}FriendsGetAll-${opt:stage, self:provider.stage}
+    handler: functions/getmyfriends.handler
+    name: ${self:service}GetMyFriends-${opt:stage, self:provider.stage}
     description: Resolving user profile
     events:
       - http:
-          path: /friends-get-all
+          path: /getmyfriends
           method: get
           authorizer:
             name: authorizer
@@ -79,29 +79,6 @@ functions:
               - Authorization
               - X-Api-Key
               - X-Amz-Security-Token
-
-  updateuser:
-      handler: functions/user_update.handler
-      name: ${self:service}UserUpdate-${opt:stage, self:provider.stage}
-      description: Updatating user profile
-      events:
-        - http:
-            path: /me
-            method: post
-            authorizer:
-              name: authorizer
-              resultTtlInSeconds: 600
-              identitySource: method.request.header.AuthToken
-            cors:
-              origins:
-                - '*'
-              headers:
-                - AuthToken
-                - Content-Type
-                - X-Amz-Date
-                - Authorization
-                - X-Api-Key
-                - X-Amz-Security-Token
 
 
 package:
