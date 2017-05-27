@@ -58,12 +58,12 @@ functions:
               - X-Amz-Security-Token
 
   getmyfriends:
-    handler: functions/getmyfriends.handler
-    name: ${self:service}GetMyFriends-${opt:stage, self:provider.stage}
+    handler: functions/friendsgetall.handler
+    name: ${self:service}FriendsGetAll-${opt:stage, self:provider.stage}
     description: Resolving user profile
     events:
       - http:
-          path: /getmyfriends
+          path: /friendsgetall
           method: get
           authorizer:
             name: authorizer
