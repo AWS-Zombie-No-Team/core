@@ -20,21 +20,18 @@
     "timestamp": 124312412412
   },
   "ContactRequest": {
-    "from": "userId",
-    "to": "userId",
+    "receiver": "userId",
+    "sender": "userId",
     "timestamp": 124312412412
   },
-  "ChatMsg": {
-    "from": "userId",
-    "to": "userId",
+  "Messages": {
+    "receiver": "userId",
+    "sender": "userId",
     "msg": "msg",
-    "msg_status": "received",
-    "timestamp": 124312412412
-  },
-  "ChatGroupMsg": {
-    "from": "userId",
-    "to": "groupId",
-    "msg": "msg",
+    "source_location": {
+      "lat": 123,
+      "lon": 123
+    },
     "msg_status": "received",
     "timestamp": 124312412412
   }
