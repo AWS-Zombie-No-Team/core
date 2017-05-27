@@ -23,6 +23,18 @@
         "LogGroupName": "/aws/lambda/ZombieMe-dev"
       }
     },
+    "GetmyfriendsLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/ZombieFriendsGetAll-dev"
+      }
+    },
+    "UpdateuserLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/ZombieUserUpdate-dev"
+      }
+    },
     "AuthorizerLambdaFunction": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
@@ -30,7 +42,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/Zombie/dev/1495887491725-2017-05-27T12:18:11.725Z/authorizer.zip"
+          "S3Key": "serverless/Zombie/dev/1495897461669-2017-05-27T15:04:21.669Z/authorizer.zip"
         },
         "FunctionName": "ZombieAuthorizer-dev",
         "Handler": "authorize.handler",
@@ -44,14 +56,14 @@
         "AuthorizerLogGroup"
       ]
     },
-    "AuthorizerLambdaVersionTr8i7BTq6Zcssewur8dEddPJ05TilM2oymK3S0WXWE": {
+    "AuthorizerLambdaVersionH8xLAnGdJwF98pL5Fzg1GjbZq7ZIxS4zIVLvAFqSD0": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AuthorizerLambdaFunction"
         },
-        "CodeSha256": "Tr8i7BTq6Zcssewur8dEddPJ05TilM2o/ymK3S0WXWE=",
+        "CodeSha256": "H8xLAnGdJwF98pL5Fzg1GjbZq7Z/IxS4zIVLvAFqSD0=",
         "Description": "Login for aws hackaton"
       }
     },
@@ -62,7 +74,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/Zombie/dev/1495887491725-2017-05-27T12:18:11.725Z/login.zip"
+          "S3Key": "serverless/Zombie/dev/1495897461669-2017-05-27T15:04:21.669Z/login.zip"
         },
         "FunctionName": "ZombieLogin-dev",
         "Handler": "login.handler",
@@ -76,14 +88,14 @@
         "LoginLogGroup"
       ]
     },
-    "LoginLambdaVersionrU2aXBpqhhTyL2PrDytAHPorg9OZ27MKA2ZwYyKZA": {
+    "LoginLambdaVersionEAUZshQMDGGNHafkRiQTSVFXvABH31N12MmroWtfM": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "LoginLambdaFunction"
         },
-        "CodeSha256": "rU2aXBpqhhTyL2PrDytAHPorg9OZ2/7MKA2Z+wYyKZA=",
+        "CodeSha256": "EAUZshQMDGGNHafkRiQTSV/FXvABH31N12MmroWtf/M=",
         "Description": "Login for aws hackaton"
       }
     },
@@ -94,7 +106,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/Zombie/dev/1495887491725-2017-05-27T12:18:11.725Z/me.zip"
+          "S3Key": "serverless/Zombie/dev/1495897461669-2017-05-27T15:04:21.669Z/me.zip"
         },
         "FunctionName": "ZombieMe-dev",
         "Handler": "me.handler",
@@ -108,15 +120,79 @@
         "MeLogGroup"
       ]
     },
-    "MeLambdaVersionvbVII5OpMBumd0VIx0PUcS7qzSrJ3M7YPx9RplMA": {
+    "MeLambdaVersionjegTuqINHnnJdo70kaWcm2Auii7elyXAtaa3VyBzvw": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "MeLambdaFunction"
         },
-        "CodeSha256": "vbVI/I5OpMBumd0+VIx0/PUcS7qzSrJ3M7YPx9RplMA=",
+        "CodeSha256": "jegTuqINHnnJdo70kaWcm2Auii7elyX+Ataa3VyBzvw=",
         "Description": "Resolving user profile"
+      }
+    },
+    "GetmyfriendsLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/Zombie/dev/1495897461669-2017-05-27T15:04:21.669Z/getmyfriends.zip"
+        },
+        "FunctionName": "ZombieFriendsGetAll-dev",
+        "Handler": "friends-get-all.handler",
+        "MemorySize": 512,
+        "Role": "arn:aws:iam::505939746198:role/service-role/ApiRole",
+        "Runtime": "nodejs6.10",
+        "Timeout": 30,
+        "Description": "Resolving user profile"
+      },
+      "DependsOn": [
+        "GetmyfriendsLogGroup"
+      ]
+    },
+    "GetmyfriendsLambdaVersionplm7CnbESLpxQ1ikV7EsjOnaDHlOVZUv5MX0yDV9tIs": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "GetmyfriendsLambdaFunction"
+        },
+        "CodeSha256": "plm7CnbESLpxQ1ikV7EsjOnaDHlOVZUv5MX0yDV9tIs=",
+        "Description": "Resolving user profile"
+      }
+    },
+    "UpdateuserLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/Zombie/dev/1495897461669-2017-05-27T15:04:21.669Z/updateuser.zip"
+        },
+        "FunctionName": "ZombieUserUpdate-dev",
+        "Handler": "user_update.handler",
+        "MemorySize": 512,
+        "Role": "arn:aws:iam::505939746198:role/service-role/ApiRole",
+        "Runtime": "nodejs6.10",
+        "Timeout": 30,
+        "Description": "Updatating user profile"
+      },
+      "DependsOn": [
+        "UpdateuserLogGroup"
+      ]
+    },
+    "UpdateuserLambdaVersionP2szbEpdFXgpGghEF9GwMvPTQKuznn3pzvHYbtTZ8": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "UpdateuserLambdaFunction"
+        },
+        "CodeSha256": "P2szbEpdFXgpGghEF9Gw+MvPTQKuznn3pzvHYbt/TZ8=",
+        "Description": "Updatating user profile"
       }
     },
     "ApiGatewayRestApi": {
@@ -150,6 +226,21 @@
           ]
         },
         "PathPart": "me",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceFriendsDashgetDashall": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "friends-get-all",
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         }
@@ -230,7 +321,7 @@
               "ResponseParameters": {
                 "method.response.header.Access-Control-Allow-Origin": "'*'",
                 "method.response.header.Access-Control-Allow-Headers": "'AuthToken,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
-                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST,GET'",
                 "method.response.header.Access-Control-Allow-Credentials": "'false'"
               },
               "ResponseTemplates": {
@@ -241,6 +332,52 @@
         },
         "ResourceId": {
           "Ref": "ApiGatewayResourceMe"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayMethodFriendsDashgetDashallOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Credentials": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'AuthToken,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'",
+                "method.response.header.Access-Control-Allow-Credentials": "'false'"
+              },
+              "ResponseTemplates": {
+                "application/json": ""
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceFriendsDashgetDashall"
         },
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
@@ -285,6 +422,90 @@
         "MethodResponses": []
       }
     },
+    "ApiGatewayMethodMeGet": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceMe"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "AuthorizationType": "CUSTOM",
+        "AuthorizerId": {
+          "Ref": "AuthorizerApiGatewayAuthorizer"
+        },
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:aws:apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "MeLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      },
+      "DependsOn": "AuthorizerApiGatewayAuthorizer"
+    },
+    "ApiGatewayMethodFriendsDashgetDashallGet": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceFriendsDashgetDashall"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "AuthorizationType": "CUSTOM",
+        "AuthorizerId": {
+          "Ref": "AuthorizerApiGatewayAuthorizer"
+        },
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:aws:apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "GetmyfriendsLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      },
+      "DependsOn": "AuthorizerApiGatewayAuthorizer"
+    },
     "ApiGatewayMethodMePost": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
@@ -314,7 +535,7 @@
                 ":lambda:path/2015-03-31/functions/",
                 {
                   "Fn::GetAtt": [
-                    "MeLambdaFunction",
+                    "UpdateuserLambdaFunction",
                     "Arn"
                   ]
                 },
@@ -358,7 +579,7 @@
         "Type": "TOKEN"
       }
     },
-    "ApiGatewayDeployment1495887491748": {
+    "ApiGatewayDeployment1495897461715": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -368,6 +589,8 @@
       },
       "DependsOn": [
         "ApiGatewayMethodLoginPost",
+        "ApiGatewayMethodMeGet",
+        "ApiGatewayMethodFriendsDashgetDashallGet",
         "ApiGatewayMethodMePost"
       ]
     },
@@ -449,6 +672,72 @@
         "Action": "lambda:InvokeFunction",
         "Principal": "apigateway.amazonaws.com"
       }
+    },
+    "GetmyfriendsLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "GetmyfriendsLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:aws:execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "UpdateuserLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "UpdateuserLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:aws:execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
     }
   },
   "Outputs": {
@@ -460,19 +749,31 @@
     "AuthorizerLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AuthorizerLambdaVersionTr8i7BTq6Zcssewur8dEddPJ05TilM2oymK3S0WXWE"
+        "Ref": "AuthorizerLambdaVersionH8xLAnGdJwF98pL5Fzg1GjbZq7ZIxS4zIVLvAFqSD0"
       }
     },
     "LoginLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "LoginLambdaVersionrU2aXBpqhhTyL2PrDytAHPorg9OZ27MKA2ZwYyKZA"
+        "Ref": "LoginLambdaVersionEAUZshQMDGGNHafkRiQTSVFXvABH31N12MmroWtfM"
       }
     },
     "MeLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "MeLambdaVersionvbVII5OpMBumd0VIx0PUcS7qzSrJ3M7YPx9RplMA"
+        "Ref": "MeLambdaVersionjegTuqINHnnJdo70kaWcm2Auii7elyXAtaa3VyBzvw"
+      }
+    },
+    "GetmyfriendsLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "GetmyfriendsLambdaVersionplm7CnbESLpxQ1ikV7EsjOnaDHlOVZUv5MX0yDV9tIs"
+      }
+    },
+    "UpdateuserLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "UpdateuserLambdaVersionP2szbEpdFXgpGghEF9GwMvPTQKuznn3pzvHYbtTZ8"
       }
     },
     "ServiceEndpoint": {

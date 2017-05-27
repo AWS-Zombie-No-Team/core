@@ -22,6 +22,13 @@ module.exports = (data) => {
         user.name = data.name
       }
 
+      if (data.status) {
+        user.status = data.status
+      }
+      if (data.location) {
+        user.location = data.location
+      }
+
       return updateUser(user).then(() => {
         console.log(user)
         return user
