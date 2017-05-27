@@ -9,7 +9,7 @@ const FriendsGetAll = (data) => {
             friends.push(friend);
         }
         return Promise.all(friends);
-    }).then( allfriends => {
+    }).then(allfriends => {
         return allfriends
             .filter(friend => friend !== undefined)
             .map((friend, key) => {
