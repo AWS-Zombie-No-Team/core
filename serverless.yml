@@ -41,7 +41,7 @@ functions:
     events:
       - http:
           path: /me
-          method: post
+          method: get
           authorizer:
             name: authorizer
             resultTtlInSeconds: 600
@@ -79,6 +79,29 @@ functions:
               - Authorization
               - X-Api-Key
               - X-Amz-Security-Token
+
+  updateuser:
+      handler: functions/user_update.handler
+      name: ${self:service}UserUpdate-${opt:stage, self:provider.stage}
+      description: Updatating user profile
+      events:
+        - http:
+            path: /me
+            method: post
+            authorizer:
+              name: authorizer
+              resultTtlInSeconds: 600
+              identitySource: method.request.header.AuthToken
+            cors:
+              origins:
+                - '*'
+              headers:
+                - AuthToken
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
 
 
 package:
