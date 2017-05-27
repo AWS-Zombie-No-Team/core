@@ -6,7 +6,6 @@ f({
   },
   user_id: 'user',
   location: '23.457524, 56.356535',
-  timestamp: 8372562834
 
 }).then(res => {
   console.log(res)

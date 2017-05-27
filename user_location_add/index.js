@@ -12,7 +12,6 @@ module.exports = (data) => {
       user.location = data.location
       updateUser(user)
 
-
       return userLocationAdd(data).then(() => {
         console.log(user)
         return data
