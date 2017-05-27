@@ -25,7 +25,7 @@ exports.handler = function(event, context) {
   getUser(id).then(user => {
     if (user.token === token
       && moment(user.tokenTimestamp).diff(moment(), 'hours') <= 6) {
-      context.succeed(generatePolicy('user', 'Allow', event.methodArn));
+      context.succeed(generatePolicy(id, 'Allow', event.methodArn));
       return;
     }
 
