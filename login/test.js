@@ -1,8 +1,12 @@
 const f = require('./index');
 
 f({
-  id: 'user',
+  authorizer: {
+    principalId: 'user'
+  },
   password: 'password',
-}, {}, (err, res) => {
-  console.log(err, res);
+}).then(res => {
+  console.log(res);
+}).catch(err => {
+  console.log(err);
 });

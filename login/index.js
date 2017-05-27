@@ -6,30 +6,30 @@ const updateUser = require('../lib/update-user');
 const hash = require('../lib/utils/sha512');
 
 
-module.exports  = (event, context, callback) => {
-  getUser(event.id)
+module.exports = (data) => {
+  return getUser(data.id)
     .then(user => {
-      if (hash(event.password) === user.password) {
+      if (hash(data.password) === user.password) {
         user.token = uuid.v4();
         user.tokenTimestamp = moment().toISOString();
         user.status = 'online';
         return updateUser(user).then(update => user);
       }
 
-      callback(new Error('Stupid zombie hazker!!!'));
+      new Error('Stupid zombie hazker!!!');
     })
     .then(user => {
-      callback(null, {
-        token: user.token,
+      return {
+        token: `${user.id}/${user.token}`,
         profession: user.profession,
         contacts: user.contacts,
         id: user.id,
         name: user.name,
         avatar: user.avatar,
-      });
+      };
     })
     .catch(err => {
       console.log(err);
-      callback(new Error('Ooops zombie login crash!'));
+      throw new Error('Can\'t authorize with such data.');
     });
 }
