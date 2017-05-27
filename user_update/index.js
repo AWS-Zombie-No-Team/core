@@ -22,7 +22,7 @@ module.exports = (data) => {
       }
 
       return updateUser(user).then(() => {
-        //console.log(user);
+        console.log(user);
         return user;
       })
     }).catch(err => {
