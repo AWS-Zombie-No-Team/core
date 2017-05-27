@@ -6,7 +6,6 @@ f({
   },
   password: 'new_password2',
   avatar: 'new_avatar2',
-  contacts: ['id1', 'id2'],
   status: 'online',
   profession: 'Medic2',
   name: 'name1'

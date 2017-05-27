@@ -11,9 +11,6 @@ module.exports = (data) => {
       if (data.avatar) {
         user.avatar = data.avatar
       }
-      if (data.contacts) {
-        user.contacts = data.contacts
-      }
       if (data.status) {
         user.status = data.status
       }
@@ -24,9 +21,10 @@ module.exports = (data) => {
         user.name = data.name
       }
 
-      return updateUser(user).then(
-        console.log(user)
-      )
+      return updateUser(user).then(() => {
+        //console.log(user);
+        return user;
+      })
     }).catch(err => {
       console.log(err)
       throw new Error('Cannot update user')
