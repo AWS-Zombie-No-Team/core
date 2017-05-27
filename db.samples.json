@@ -8,6 +8,10 @@
       "id2",
       "id3"
     ],
+    "location": {
+      "lat": 123,
+      "lon": 123
+    },
     "status": "panic",
     "profession": "Medic"
   },

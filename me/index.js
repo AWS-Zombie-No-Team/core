@@ -9,6 +9,7 @@ module.exports = (data) => {
         id: user.id,
         name: user.name,
         avatar: user.avatar,
+        location: user.location
       };
     })
     .catch(err => {

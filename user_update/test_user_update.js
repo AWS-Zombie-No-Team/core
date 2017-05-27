@@ -4,10 +4,9 @@ f({
   authorizer: {
     principalId: 'user'
   },
-  password: 'new_password2',
-  status: 'online',
-  profession: 'Medic2',
-  name: 'name1'
+
+
+  location: '30.248764, 45.853034'
 }).then(res => {
   console.log(res)
 }).catch(err => {

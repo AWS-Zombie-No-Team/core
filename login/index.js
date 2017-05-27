@@ -23,6 +23,7 @@ module.exports = (data) => {
         profession: user.profession,
         contacts: user.contacts,
         id: user.id,
+        location: user.location,
         name: user.name,
         avatar: user.avatar,
       }
