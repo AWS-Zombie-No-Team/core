@@ -57,6 +57,30 @@ functions:
               - X-Api-Key
               - X-Amz-Security-Token
 
+  getmyfriends:
+    handler: functions/getmyfriends.handler
+    name: ${self:service}Me-${opt:stage, self:provider.stage}
+    description: Resolving user profile
+    events:
+      - http:
+          path: /getmyfriends
+          method: get
+          authorizer:
+            name: authorizer
+            resultTtlInSeconds: 600
+            identitySource: method.request.header.AuthToken
+          cors:
+            origins:
+              - '*'
+            headers:
+              - AuthToken
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+
+
 package:
   individually: true
   exclude:
