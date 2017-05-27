@@ -57,13 +57,59 @@ functions:
               - X-Api-Key
               - X-Amz-Security-Token
 
-  getmyfriends:
+  friendsgetall:
     handler: functions/friendsgetall.handler
     name: ${self:service}FriendsGetAll-${opt:stage, self:provider.stage}
-    description: Resolving user profile
+    description: Returns your friend profiles
     events:
       - http:
           path: /friendsgetall
+          method: get
+          authorizer:
+            name: authorizer
+            resultTtlInSeconds: 600
+            identitySource: method.request.header.AuthToken
+          cors:
+            origins:
+              - '*'
+            headers:
+              - AuthToken
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+
+contactrequest:
+    handler: functions/contactrequest.handler
+    name: ${self:service}contactRequest-${opt:stage, self:provider.stage}
+    description: Sends contact request to add as a friend
+    events:
+      - http:
+          path: /contactrequest
+          method: post
+          authorizer:
+            name: authorizer
+            resultTtlInSeconds: 600
+            identitySource: method.request.header.AuthToken
+          cors:
+            origins:
+              - '*'
+            headers:
+              - AuthToken
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+
+contactgetrequests:
+    handler: functions/contactgetrequests.handler
+    name: ${self:service}contactGetRequests-${opt:stage, self:provider.stage}
+    description: Returns ids who wants to add you as a friend
+    events:
+      - http:
+          path: /contactgetrequests
           method: get
           authorizer:
             name: authorizer
