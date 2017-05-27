@@ -1,12 +1,13 @@
 const getUser = require('../lib/get-user')
 const updateUser = require('../lib/update-user')
+const hash = require('../lib/utils/sha512')
 
 module.exports = (data) => {
   return getUser(data.authorizer.principalId)
     .then(user => {
       //user = Object.assign({}, user, data)
       if (data.password) {
-        user.password = data.password
+        user.password = hash(data.password)
       }
       if (data.avatar) {
         user.avatar = data.avatar
@@ -22,8 +23,8 @@ module.exports = (data) => {
       }
 
       return updateUser(user).then(() => {
-        console.log(user);
-        return user;
+        console.log(user)
+        return user
       })
     }).catch(err => {
       console.log(err)

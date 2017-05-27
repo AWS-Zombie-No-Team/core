@@ -5,7 +5,6 @@ f({
     principalId: 'user'
   },
   password: 'new_password2',
-  avatar: 'new_avatar2',
   status: 'online',
   profession: 'Medic2',
   name: 'name1'
