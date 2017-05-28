@@ -1,16 +1,39 @@
 const aws = require('./../lib/aws')
-const getMsg = require('./../lib/get_msg')
 
 const getAllMsg = (data) => {
-  return getuser(data.authorizer.principalId).then(user => {
-    var messages = []
-    for (var i = 0, len = ; i < len; i++) {
-      var msg = getMsg(data.compoundkey)
-      messages.push(msg)
-    }
-    return Promise.all(friends)
-  })
 
+  let key = [data.authorizer.principalId, data.receiver].sort().join('-');
+
+  const expression = {
+    ':hkey': key,
+  };
+
+  const exname = {
+    "#key": "compoundkey"
+  }
+
+  if (data.timestamp) {
+    expression[':rkey'] = data.timestamp;
+    exname['#sortkey'] = 'timestamp';
+  }
+
+  let range = data.timestamp ? 'and #sortkey > :rkey' : null;
+
+  const params = Object.assign({}, {
+    TableName: 'Messages',
+    KeyConditionExpression: `#key = :hkey ${range ? range : ''}`,
+    ExpressionAttributeValues: expression,
+    ExpressionAttributeNames: exname,
+    ScanIndexForward: false
+  });
+
+  if (data.limit) {
+    params.Limit = data.limit;
+  }
+
+  return aws.dynamodb.query(params).promise().then(res => {
+    return res.Items;
+  });
 }
 
-module.exports = GetAllMsg
+module.exports = getAllMsg;

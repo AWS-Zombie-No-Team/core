@@ -41,7 +41,7 @@ functions:
     events:
       - http:
           path: /me
-          method: post
+          method: get
           authorizer:
             name: authorizer
             resultTtlInSeconds: 600
@@ -57,7 +57,29 @@ functions:
               - X-Api-Key
               - X-Amz-Security-Token
 
-updateuser:
+  getallmessages:
+    handler: functions/get-all-messages.handler
+    name: ${self:service}GetAllMessages-${opt:stage, self:provider.stage}
+    description: Resolving all messages
+    events:
+      - http:
+          path: /get-all-messages
+          method: post
+          authorizer:
+            name: authorizer
+            resultTtlInSeconds: 600
+            identitySource: method.request.header.AuthToken
+          cors:
+            origins:
+              - '*'
+            headers:
+              - AuthToken
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+  updateuser:
       handler: functions/user_update.handler
       name: ${self:service}UserUpdate-${opt:stage, self:provider.stage}
       description: Updating user profile
@@ -82,7 +104,7 @@ updateuser:
 
 
   friendsgetall:
-    handler: functions/friendsgetall.handler
+    handler: functions/friends-get-all.handler
     name: ${self:service}FriendsGetAll-${opt:stage, self:provider.stage}
     description: Returns your friend profiles
     events:
@@ -104,36 +126,36 @@ updateuser:
               - X-Api-Key
               - X-Amz-Security-Token
 
-contactrequest:
-    handler: functions/contactrequest.handler
-    name: ${self:service}contactRequest-${opt:stage, self:provider.stage}
-    description: Sends contact request to add as a friend
-    events:
-      - http:
-          path: /contactrequest
-          method: post
-          authorizer:
-            name: authorizer
-            resultTtlInSeconds: 600
-            identitySource: method.request.header.AuthToken
-          cors:
-            origins:
-              - '*'
-            headers:
-              - AuthToken
-              - Content-Type
-              - X-Amz-Date
-              - Authorization
-              - X-Api-Key
-              - X-Amz-Security-Token
+#  contactrequest:
+#    handler: functions/contactrequest.handler
+#    name: ${self:service}ContactRequest-${opt:stage, self:provider.stage}
+#    description: Sends contact request to add as a friend
+#    events:
+#      - http:
+#          path: /contact-request
+#          method: post
+#          authorizer:
+#            name: authorizer
+#            resultTtlInSeconds: 600
+#            identitySource: method.request.header.AuthToken
+#          cors:
+#            origins:
+#              - '*'
+#            headers:
+#              - AuthToken
+#              - Content-Type
+#              - X-Amz-Date
+#              - Authorization
+#              - X-Api-Key
+#              - X-Amz-Security-Token
 
-contactgetrequests:
+  contactgetrequests:
     handler: functions/contactgetrequests.handler
-    name: ${self:service}contactGetRequests-${opt:stage, self:provider.stage}
+    name: ${self:service}ContactGetRequests-${opt:stage, self:provider.stage}
     description: Returns ids who wants to add you as a friend
     events:
       - http:
-          path: /contactgetrequests
+          path: /contact-get-requests
           method: get
           authorizer:
             name: authorizer
